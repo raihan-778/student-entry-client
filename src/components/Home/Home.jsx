@@ -50,10 +50,13 @@ const Home = () => {
       >
         <MenuItem onClick={handleClose}>
           {" "}
-          <Link to="add-student"> Add Student</Link>
+          <Link to="/add-student"> Add Student</Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <Link to="/login">Login</Link>
+        </MenuItem>
       </Menu>
     </Box>
   );
