@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -47,39 +48,13 @@ const Home = () => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>
+          {" "}
+          <Link to="add-student"> Add Student</Link>
+        </MenuItem>
         <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem>
       </Menu>
-      <div>
-        <FormControl>
-          <InputLabel
-            sx={{
-              color: "#d2a5fe",
-            }}
-            htmlFor="my-input"
-          >
-            Email
-          </InputLabel>
-          <Input
-            sx={{
-              color: "#e1f5fe",
-            }}
-            type="email"
-            placeholder="Enter your Email"
-            id="my-input"
-            aria-describedby="my-helper-text"
-          />
-          <FormHelperText
-            sx={{
-              color: "#e1f5fe",
-            }}
-            id="my-helper-text"
-          >
-            We'll never share your email.
-          </FormHelperText>
-        </FormControl>
-      </div>
     </Box>
   );
 };
