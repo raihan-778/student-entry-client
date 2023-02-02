@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -24,6 +25,7 @@ const AddStudent = () => {
   } = useForm();
 
   const handelAddStudent = (data) => {
+    console.log(studentInfo);
     console.log(data.imgUrl[0]);
     const image = data.imgUrl[0];
     const formData = new FormData();
@@ -38,24 +40,30 @@ const AddStudent = () => {
         if (imgData.success) {
           console.log(imgData.data.url);
         }
-        const StudentInfo = {
+        const studentInfo = {
           image: imgData.data.url,
-          firstName: data.first_name,
-          title: data.title,
-          description: data.description,
+          firstName: data.firstname,
+          middleName: data.middlename,
+          lastName: data.lastname,
+          // class: data.class,
+          // division: data.division,
+          // rollNumber: data.roll_number,
+          // addressOne: data.address_one,
+          // addressTwo: data.address_one,
         };
-        fetch("https://my-task-management-server.vercel.app/media-task", {
+        console.log(studentInfo);
+        fetch("http://localhost:5000/student-info", {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
-          body: JSON.stringify(taskInfo),
+          body: JSON.stringify(studentInfo),
         })
           .then((res) => res.json())
           .then((result) => {
             console.log(result);
-            toast.success(`New task ${data.title} added successfully`);
-            navigate("/media");
+            toast.success(`new Student ${data.firstName} added successfully`);
+            navigate("/");
           });
       });
   };
@@ -76,16 +84,15 @@ const AddStudent = () => {
       <Typography variant="h4" gutterBottom>
         Add Student
       </Typography>
-      <FormControl>
+      <FormControl onSubmit={handleSubmit(handelAddStudent)}>
         <TextField
           required
           id="outlined-required"
           label="image"
           name="image"
           type="file"
-          defaultValue="select image"
           {...register("image", {
-            required: "first name is required",
+            required: "image is required",
           })}
         />
         <TextField
@@ -116,7 +123,7 @@ const AddStudent = () => {
           defaultValue="Enter Last Name"
           {...register("last-nam", { required: "last name is required" })}
         />
-        <Select
+        {/* <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           // value={section}
@@ -131,9 +138,9 @@ const AddStudent = () => {
               {singleClass}
             </MenuItem>
           ))}
-        </Select>
+        </Select> */}
 
-        <Select
+        {/* <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           // value={section}
@@ -148,21 +155,25 @@ const AddStudent = () => {
               {division}
             </MenuItem>
           ))}
-        </Select>
-        <TextField
+        </Select> */}
+        {/* <TextField
           required
           id="roll-number"
           label="Roll Number"
           defaultValue="Enter your Roll "
+          name="roll_number"
+          {...register("roll_number", { required: "roll_number is required" })}
           variant="filled"
-        />
+        /> */}
 
-        <TextareaAutosize
+        {/* <TextareaAutosize
           aria-label="Address Line 01"
           minRows={3}
           placeholder="Address Line 01"
           style={{ width: 300 }}
           variant="filled"
+          name="address_one"
+          {...register("address_one", { required: "address_one is required" })}
         />
 
         <TextareaAutosize
@@ -171,14 +182,11 @@ const AddStudent = () => {
           placeholder="Address Line 02"
           style={{ width: 300 }}
           variant="filled"
-        />
-        <TextField
-          required
-          id="roll-number"
-          label="Roll Number"
-          defaultValue="Enter your Roll "
-          variant="filled"
-        />
+          name="address_two"
+          {...register("address_two", { required: "address_two is required" })}
+        /> */}
+
+        <Button type="submit">Add Student</Button>
       </FormControl>
     </Box>
   );
