@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+// import { CssBaseline, ThemeProvider } from "@mui/material";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider } from "react-router-dom";
@@ -11,11 +11,11 @@ import { theme } from "./Theme/Theme";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router}>
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}> */}
         <ToastContainer />
         <App />
-      </ThemeProvider>
+      {/* </ThemeProvider> */}
     </RouterProvider>
-    <CssBaseline />
+    {/* <CssBaseline /> */}
   </React.StrictMode>
 );

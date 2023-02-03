@@ -1,52 +1,12 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  makeStyles,
-  MenuItem,
-  Select,
-  TextareaAutosize,
-  TextField,
-  Typography,
-} from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    margin: "-1rem 0 2rem 0",
-    padding: "0 7rem",
-    [theme.breakpoints.down("xs")]: {
-      padding: "0",
-    },
-    [theme.breakpoints.down("md")]: {
-      padding: "0",
-    },
-    marginTop: "auto",
-  },
-  textField: {
-    width: "100%",
-  },
-  errorMessage: {
-    color: "red",
-    fontSize: "0.9rem",
-    marginTop: "0.2rem",
-  },
-  select: {
-    variant: "outlined",
-  },
-}));
-
 const AddStudent = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const imgHostKey = "37e7a67acc4b35dd634f1b051a00876d";
-
-  const [classValue, setClassValue] = useState("");
-  const [divisionValue, setDivisionValue] = useState("");
 
   const {
     register,
@@ -78,7 +38,7 @@ const AddStudent = () => {
           division: data.division,
           rollNumber: data.roll_number,
           addressOne: data.address_one,
-          addressTwo: data.address_one,
+          addressTwo: data.address_two,
         };
         console.log(studentInfo);
         fetch("http://localhost:5000/student-info", {
@@ -97,132 +57,203 @@ const AddStudent = () => {
       });
   };
 
-  const classes = useStyles();
-  const divisions = ["A", "B", "C", "D", "E"];
-
-  const handleOnChange = () => {
-    setDivisionValue(data.division);
-  };
   return (
-    <Box
-      component="form"
-      className={classes.root}
-      onSubmit={handleSubmit(handelAddStudent)}
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-        "&.MuiFormControl-root": { mx: 5, width: "50%" },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <Typography variant="h4" gutterBottom>
-        Add Student
-      </Typography>
+    <div className="flex pt-20 h-auto justify-center w-full items-center">
+      <div>
+        <h2 className="text-xl  font-bold">Add Student</h2>
+        <form onSubmit={handleSubmit(handelAddStudent)}>
+          <div className="form-control w-full text-slate-700 max-w-s">
+            <label className="label">
+              <span className="label-text">Enter Profile Image</span>
+            </label>
+            <input
+              name="image"
+              {...register("image", {
+                required: "image is required",
+              })}
+              type="file"
+              placeholder="Type image url"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+            {errors.img?.type === "required" && (
+              <p className="text-orange-600" role="alert">
+                {errors.image?.message}
+              </p>
+            )}
+          </div>
 
-      <TextField
-        required
-        id="outlined-required"
-        label="image"
-        name="image"
-        type="file"
-        {...register("image", {
-          required: "image is required",
-        })}
-      />
-      <TextField
-        required
-        id="outlined-required"
-        label="First Name"
-        name="first_name"
-        defaultValue="Enter First Name"
-        {...register("first_name", {
-          required: "first name is required",
-        })}
-      />
-      <TextField
-        required
-        id="outlined-disabled"
-        label="Middle Name"
-        name="middle_name"
-        defaultValue="Enter Middle Name"
-        {...register("middle_name", {
-          required: "middle name is required",
-        })}
-      />
-      <TextField
-        required
-        id="outlined-disabled"
-        label="Last Name"
-        name="last_name"
-        defaultValue="Enter Last Name"
-        {...register("last_name", { required: "last name is required" })}
-      />
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        // value={section}
-        label="class"
-        type="select"
-        name="class"
-        onChange={handleOnChange}
-        {...register("class", { required: "class" })}
-        // onChange={handleChange}
-      >
-        {classes.map((singleClass) => (
-          <MenuItem key={singleClass} value={singleClass}>
-            {singleClass}
-          </MenuItem>
-        ))}
-      </Select>
+          {/* First Name */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">First Name</span>
+            </label>
+            <input
+              {...register("first_name", {
+                required: "First name field cannot be empty",
+              })}
+              type="text"
+              placeholder="Type your Product Name"
+              name="first_name"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-orange-600" role="alert">
+                {errors.first_name?.message}
+              </p>
+            )}
+          </div>
+          {/* Middle Name */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Middle Name</span>
+            </label>
+            <input
+              {...register("middle_name", {
+                required: "Middle Name field cannot be empty",
+              })}
+              type="text"
+              placeholder="Type your Product Name"
+              name="middle_name"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-orange-600" role="alert">
+                {errors.middle_name?.message}
+              </p>
+            )}
+          </div>
+          {/* Last Name */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Last Name</span>
+            </label>
+            <input
+              {...register("last_name", {
+                required: "Last Name field cannot be empty",
+              })}
+              type="text"
+              placeholder="Type your Product Name"
+              name="last_name"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+            {errors.name?.type === "required" && (
+              <p className="text-orange-600" role="alert">
+                {errors.last_name?.message}
+              </p>
+            )}
+          </div>
 
-      <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        // value={section}
-        label="Division"
-        type="select"
-        name="division"
-        {...register("division", { required: "division is required" })}
-        // onChange={handleChange}
-      >
-        {divisions.map((division) => (
-          <MenuItem value={division} key={division}>
-            {division}
-          </MenuItem>
-        ))}
-      </Select>
-      <TextField
-        required
-        id="roll-number"
-        label="Roll Number"
-        defaultValue="Enter your Roll "
-        name="roll_number"
-        {...register("roll_number", { required: "roll_number is required" })}
-        variant="filled"
-      />
+          {/* Class */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Select Product Condition?</span>
+            </label>
+            <select
+              {...register("class", {
+                required: "Please Select Class",
+              })}
+              name="class"
+              type="select"
+              className="select select-bordered neutral w-full max-w-xs"
+            >
+              <option selected default>
+                Class
+              </option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+          </div>
+          {/* Division*/}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Division</span>
+            </label>
+          </div>
+          <select
+            {...register("division", {
+              required: "Please select Division",
+            })}
+            name="division"
+            type="select"
+            className="select select-bordered neutral text-slate-700 w-full max-w-xs"
+          >
+            <option disabled selected>
+              Division
+            </option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+            <option>D</option>
+            <option>E</option>
+          </select>
+          {/* Roll Number */}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Roll Number</span>
+            </label>
+            <input
+              {...register("rool_number", {
+                required: "enter short rool number",
+              })}
+              type="text"
+              placeholder="Type here"
+              name="rool_number"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+          </div>
+          {/* Address Line 1*/}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Address Line 1</span>
+            </label>
+            <textarea
+              {...register("address_one", {
+                required: "enter used Duration",
+              })}
+              row="4"
+              column="32"
+              type="text"
+              placeholder="Type here"
+              name="address_one"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+          </div>
+          {/* Address Line 2*/}
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">Address Line 2</span>
+            </label>
+            <textarea
+              {...register("address_two", {
+                required: "enter used Duration",
+              })}
+              row="4"
+              column="32"
+              type="text"
+              placeholder="Type here"
+              name="address_two"
+              className="input input-bordered neutral  w-full max-w-xs"
+            />
+          </div>
 
-      <TextareaAutosize
-        aria-label="Address Line 01"
-        minRows={3}
-        placeholder="Address Line 01"
-        style={{ width: 300 }}
-        variant="filled"
-        name="address_one"
-        {...register("address_one", { required: "address_one is required" })}
-      />
-
-      <TextareaAutosize
-        aria-label="Address Line 02"
-        minRows={3}
-        placeholder="Address Line 02"
-        style={{ width: 300 }}
-        variant="filled"
-        name="address_two"
-        {...register("address_two", { required: "address_two is required" })}
-      />
-
-      <Button type="submit">Add Student</Button>
-    </Box>
+          <input
+            className="btn mt-5 w-full max-w-xs btn-accent"
+            value="Add Product"
+            type="submit"
+          />
+        </form>
+      </div>
+    </div>
   );
 };
 
