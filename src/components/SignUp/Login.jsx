@@ -7,8 +7,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
   const [loginError, setLoginError] = useState("");
   const [loginUseremail, setLoginUseremail] = useState("");
-  const { login, googleSignIn } = useContext(AuthContext);
-  const [token] = useToken(loginUseremail);
+  const { user } = useCon;
 
   const location = useLocation();
   const navigate = useNavigate();
