@@ -9,19 +9,27 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import StudentCard from "../StudentInfo/StudentCard";
 import Navigation from "./Navigation";
+import Grid from "@mui/material/Grid";
 
 const Home = () => {
   return (
-    <>
-      <Box
-        sx={{
-          backgroundColor: "#E5FDD1",
-        }}
-      >
-        <Navigation></Navigation>
-        <StudentCard></StudentCard>
-      </Box>
-    </>
+    <Box
+      fullWidth
+      sx={{
+        backgroundColor: "#E5FDD1",
+      }}
+    >
+      <>
+        <Grid container spacing={2}>
+          <Grid item xs={2}>
+            <Navigation></Navigation>
+          </Grid>
+          <Grid item xs={10}>
+            <StudentCard></StudentCard>
+          </Grid>
+        </Grid>
+      </>
+    </Box>
   );
 };
 
