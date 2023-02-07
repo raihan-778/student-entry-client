@@ -2,7 +2,7 @@ import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
-import { MenuItem, Select, TextField } from "@mui/material";
+import { Box, MenuItem, Select, TextField } from "@mui/material";
 
 const AddStudent = ({ name, label, required }) => {
   // const { control, handleSubmit } = useController();
@@ -68,18 +68,25 @@ const AddStudent = ({ name, label, required }) => {
   };
 
   return (
-    <div className="flex pt-20 h-auto justify-center w-full items-center">
-      <h2 className="text-5xl  font-bold">Add Student</h2>
+    <Box
+      sx={{
+        backgroundColor: "#fff",
+        padding: 5,
+      }}
+    >
+      <h2 varient="h3">Add Student</h2>
       <form onSubmit={handleSubmit(handelAddStudent)}>
         {/* First Name */}
         <Controller
           name="first_name"
           control={control}
+          sx={{ m: 1, width: "25ch" }}
           render={({ field }) => (
             <TextField
               {...field}
               label="firstName"
-              varient="outline"
+              varient="outline success"
+              sx={{ m: 1, width: "25ch" }}
               error={!!errors.first_name}
               helperText={errors.first_name ? errors.first_name.message : ""}
             />
@@ -94,7 +101,8 @@ const AddStudent = ({ name, label, required }) => {
             <TextField
               {...field}
               label="MiddleName"
-              varient="outline"
+              varient="outline success"
+              sx={{ m: 1, width: "25ch" }}
               error={!!errors.middle_name}
               helperText={errors.middle_name ? errors.middle_name.message : ""}
             />
@@ -105,23 +113,37 @@ const AddStudent = ({ name, label, required }) => {
         <Controller
           name="last_name"
           control={control}
+          margin="normal"
           render={({ field }) => (
             <TextField
               {...field}
               label="LastName"
-              varient="outline"
+              color="success"
+              sx={{ m: 1, width: "25ch" }}
               error={!!errors.last_name}
               helperText={errors.last_name ? errors.last_name.message : ""}
             />
           )}
         />
-
+        <br />
+        <br />
         {/* Class */}
         <Controller
           name="class"
           control={control}
+          margin="normal"
           render={({ field }) => (
-            <Select {...field} label="Class" varient="outline" mt-2>
+            <Select
+              {...field}
+              label="Class"
+              varient="outline"
+              sx={{
+                borderColor: "red",
+                borderWidth: 2,
+                borderRadius: 2,
+                paddingX: 5,
+              }}
+            >
               <MenuItem selected default>
                 Class
               </MenuItem>
@@ -165,14 +187,15 @@ const AddStudent = ({ name, label, required }) => {
         {/* Address Line 1*/}
 
         {/* Address Line 2*/}
-
+        <br />
+        <br />
         <input
           className="btn mt-5 w-full max-w-xs btn-accent"
           value="Add Product"
           type="submit"
         />
       </form>
-    </div>
+    </Box>
   );
 };
 
