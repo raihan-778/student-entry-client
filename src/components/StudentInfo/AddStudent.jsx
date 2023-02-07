@@ -26,7 +26,8 @@ const AddStudent = ({ name, label, required }) => {
 
   const handelAddStudent = (data) => {
     console.log(data);
-    const image = data.image[0];
+    const image = data.imageUrl[0];
+    console.log(image);
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
@@ -38,32 +39,33 @@ const AddStudent = ({ name, label, required }) => {
       .then((imgData) => {
         if (imgData.success) {
           console.log(imgData.data.url);
+
+          const studentInfo = {
+            firstName: data.first_name,
+            middleName: data.middle_name,
+            lastName: data.last_name,
+            class: data.class,
+            division: data.division,
+            image: imgData.data.url,
+            // rollNumber: data.roll_number,
+            // addressOne: data.address_one,
+            // addressTwo: data.address_two,
+          };
+          console.log(studentInfo);
+          fetch("http://localhost:5000/student-info", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(studentInfo),
+          })
+            .then((res) => res.json())
+            .then((result) => {
+              console.log(result);
+              toast.success(`new Student ${data.firstName} added successfully`);
+              // navigate("/");
+            });
         }
-        const studentInfo = {
-          image: imgData.data.url,
-          firstName: data.first_name,
-          middleName: data.middle_name,
-          lastName: data.last_name,
-          class: data.class,
-          division: data.division,
-          rollNumber: data.roll_number,
-          addressOne: data.address_one,
-          addressTwo: data.address_two,
-        };
-        console.log(studentInfo);
-        fetch("http://localhost:5000/student-info", {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify(studentInfo),
-        })
-          .then((res) => res.json())
-          .then((result) => {
-            console.log(result);
-            toast.success(`new Student ${data.firstName} added successfully`);
-            // navigate("/");
-          });
       });
   };
 
@@ -147,23 +149,49 @@ const AddStudent = ({ name, label, required }) => {
               <MenuItem selected default>
                 Class
               </MenuItem>
-              <MenuItem>1</MenuItem>
-              <MenuItem>2</MenuItem>
-              <MenuItem>3</MenuItem>
-              <MenuItem>4</MenuItem>
-              <MenuItem>5</MenuItem>
-              <MenuItem>6</MenuItem>
-              <MenuItem>7</MenuItem>
-              <MenuItem>8</MenuItem>
-              <MenuItem>9</MenuItem>
-              <MenuItem>10</MenuItem>
-              <MenuItem>11</MenuItem>
-              <MenuItem>12</MenuItem>
+              <MenuItem value="1">1</MenuItem>
+              <MenuItem value="2">2</MenuItem>
+              <MenuItem value="3">3</MenuItem>
+              <MenuItem value="4">4</MenuItem>
+              <MenuItem value="5">5</MenuItem>
+              <MenuItem value="6">6</MenuItem>
+              <MenuItem value="7">7</MenuItem>
+              <MenuItem value="8">8</MenuItem>
+              <MenuItem value="9">9</MenuItem>
+              <MenuItem value="10">10</MenuItem>
+              <MenuItem value="11">11</MenuItem>
+              <MenuItem value="12">12</MenuItem>
             </Select>
           )}
         />
 
         {/* Division*/}
+        <Controller
+          name="division"
+          control={control}
+          render={({ field }) => (
+            <Select
+              {...field}
+              label="Class"
+              varient="outline"
+              sx={{
+                borderColor: "red",
+                borderWidth: 2,
+                borderRadius: 2,
+                paddingX: 5,
+              }}
+            >
+              <MenuItem selected default>
+                Division
+              </MenuItem>
+              <MenuItem value="A">A</MenuItem>
+              <MenuItem value="B">B</MenuItem>
+              <MenuItem value="C">C</MenuItem>
+              <MenuItem value="D">D</MenuItem>
+              <MenuItem value="E">E</MenuItem>
+            </Select>
+          )}
+        />
 
         {/* <Controller
           as={
@@ -187,11 +215,26 @@ const AddStudent = ({ name, label, required }) => {
         {/* Address Line 1*/}
 
         {/* Address Line 2*/}
+        {/* file upload */}
+        <Controller
+          name="url"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <input
+              type="file"
+              onChange={(e) => {
+                field.onChange(e.target.files);
+              }}
+              multiple
+            />
+          )}
+        />
         <br />
         <br />
         <input
           className="btn mt-5 w-full max-w-xs btn-accent"
-          value="Add Product"
+          value="Submit"
           type="submit"
         />
       </form>

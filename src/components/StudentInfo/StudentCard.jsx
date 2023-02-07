@@ -6,21 +6,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useQuery } from "@tanstack/react-query";
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const students = [
-//   createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-//   createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-//   createData("Eclair", 262, 16.0, 24, 6.0),
-//   createData("Cupcake", 305, 3.7, 67, 4.3),
-//   createData("Gingerbread", 356, 16.0, 49, 3.9),
-// ];
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
+import { toast } from "react-toastify";
 
 export default function StudentCard() {
+  const [deleteStudent, setDeleteStudent] = useState("");
   const [stdInfo, setStdInfo] = useState("");
   const url = "http://localhost:5000/student-info";
   // const {
@@ -47,6 +42,29 @@ export default function StudentCard() {
       });
   }, []);
 
+  const handleDeleteStudent = (id) => {
+    console.log(id);
+    const proceed = window.confirm(
+      "Are you sure you want delete this Student Info?"
+    );
+    if (proceed) {
+      fetch(`http://localhost:5000/student-info/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          if (data.deletedCount > 0) {
+            refetch();
+            toast.success(`buyer ${student.firstName} deleted successfully`);
+          }
+        });
+    }
+  };
+  // if (isLoading) {
+  //   return <LoadingSpinner></LoadingSpinner>;
+  // }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
@@ -71,7 +89,19 @@ export default function StudentCard() {
                 </TableCell>
                 <TableCell align="right">{student.firstName}</TableCell>
                 <TableCell align="right">{student.middleName}</TableCell>
-                <TableCell align="right">{student.lastName}</TableCell>
+                <TableCell align="right">
+                  <div>
+                    <Link to="#">
+                      <VisibilityIcon />
+                    </Link>
+                    <Button onClick={() => handleDeleteStudent(student._id)}>
+                      <DeleteIcon />
+                    </Button>
+                    <Link to="#">
+                      <EditIcon />
+                    </Link>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
