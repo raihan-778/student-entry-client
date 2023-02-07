@@ -48,7 +48,7 @@ const AddStudent = ({ name, label, required }) => {
             division: data.division,
             image: imgData.data.url,
             rollNumber: data.roll_number,
-            // addressOne: data.address_one,
+            addressOne: data.address_one,
             // addressTwo: data.address_two,
           };
           console.log(studentInfo);
@@ -213,17 +213,18 @@ const AddStudent = ({ name, label, required }) => {
         />
         {/* Address Line 1*/}
         <Controller
-          name="roll_number"
+          name="address_one"
           control={control}
           margin="normal"
           render={({ field }) => (
             <TextField
               {...field}
-              label="Roll Number"
+              label="Address One"
               color="success"
+              type="text"
               sx={{ m: 1, width: "25ch" }}
-              error={!!errors.Roll_number}
-              helperText={errors.roll_number ? errors.last_name.message : ""}
+              error={!!errors.address_one}
+              helperText={errors.address_one ? errors.last_name.message : ""}
             />
           )}
         />
