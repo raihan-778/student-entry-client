@@ -55,7 +55,7 @@ export default function StudentCard() {
         .then((data) => {
           console.log(data);
           if (data.deletedCount > 0) {
-            refetch();
+            // refetch();
             toast.success(`buyer ${student.firstName} deleted successfully`);
           }
         });

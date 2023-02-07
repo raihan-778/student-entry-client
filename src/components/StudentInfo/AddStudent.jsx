@@ -26,7 +26,7 @@ const AddStudent = ({ name, label, required }) => {
 
   const handelAddStudent = (data) => {
     console.log(data);
-    const image = data.imageUrl[0];
+    const image = data.url[0];
     console.log(image);
     const formData = new FormData();
     formData.append("image", image);
@@ -47,7 +47,7 @@ const AddStudent = ({ name, label, required }) => {
             class: data.class,
             division: data.division,
             image: imgData.data.url,
-            // rollNumber: data.roll_number,
+            rollNumber: data.roll_number,
             // addressOne: data.address_one,
             // addressTwo: data.address_two,
           };
@@ -62,7 +62,9 @@ const AddStudent = ({ name, label, required }) => {
             .then((res) => res.json())
             .then((result) => {
               console.log(result);
-              toast.success(`new Student ${data.firstName} added successfully`);
+              toast.success(
+                `new Student ${data.first_name} added successfully`
+              );
               // navigate("/");
             });
         }
@@ -193,26 +195,38 @@ const AddStudent = ({ name, label, required }) => {
           )}
         />
 
-        {/* <Controller
-          as={
-            <Select>
-              <MenuItem disabled selected>
-                Division
-              </MenuItem>
-              <MenuItem>A</MenuItem>
-              <MenuItem>B</MenuItem>
-              <MenuItem>C</MenuItem>
-              <MenuItem>D</MenuItem>
-              <MenuItem>E</MenuItem>
-            </Select>
-          }
-          control={control}
-          name="mySelect"
-        /> */}
-
         {/* Roll Number */}
-
+        <Controller
+          name="roll_number"
+          control={control}
+          margin="normal"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Roll Number"
+              color="success"
+              sx={{ m: 1, width: "25ch" }}
+              error={!!errors.Roll_number}
+              helperText={errors.roll_number ? errors.last_name.message : ""}
+            />
+          )}
+        />
         {/* Address Line 1*/}
+        <Controller
+          name="roll_number"
+          control={control}
+          margin="normal"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Roll Number"
+              color="success"
+              sx={{ m: 1, width: "25ch" }}
+              error={!!errors.Roll_number}
+              helperText={errors.roll_number ? errors.last_name.message : ""}
+            />
+          )}
+        />
 
         {/* Address Line 2*/}
         {/* file upload */}
