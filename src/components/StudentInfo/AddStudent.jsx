@@ -1,9 +1,16 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
+import { MenuItem, Select, TextField } from "@mui/material";
 
-const AddStudent = () => {
+const AddStudent = ({ name, label, required }) => {
+  // const { control, handleSubmit } = useController();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   const [errorMsg, setErrorMsg] = useState("");
   const navigate = useNavigate();
   const imgHostKey = "37e7a67acc4b35dd634f1b051a00876d";
@@ -12,7 +19,10 @@ const AddStudent = () => {
     register,
     formState: { errors },
     handleSubmit,
+    watch,
+    control,
   } = useForm();
+  control;
 
   const handelAddStudent = (data) => {
     console.log(data);
@@ -61,190 +71,100 @@ const AddStudent = () => {
     <div className="flex pt-20 h-auto justify-center w-full items-center">
       <h2 className="text-5xl  font-bold">Add Student</h2>
       <form onSubmit={handleSubmit(handelAddStudent)}>
-        <div className="form-control w-full text-slate-700 max-w-s">
-          <label className="label">
-            <span className="label-text">Enter Profile Image</span>
-          </label>
-          <input
-            name="image"
-            {...register("image", {
-              required: "image is required",
-            })}
-            type="file"
-            placeholder="Type image url"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-          {errors.img?.type === "required" && (
-            <p className="text-orange-600" role="alert">
-              {errors.image?.message}
-            </p>
-          )}
-        </div>
-
         {/* First Name */}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">First Name</span>
-          </label>
-          <input
-            {...register("first_name", {
-              required: "First name field cannot be empty",
-            })}
-            type="text"
-            placeholder="Type your Product Name"
-            name="first_name"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-          {errors.name?.type === "required" && (
-            <p className="text-orange-600" role="alert">
-              {errors.first_name?.message}
-            </p>
+        <Controller
+          name="first_name"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="firstName"
+              varient="outline"
+              error={!!errors.first_name}
+              helperText={errors.first_name ? errors.first_name.message : ""}
+            />
           )}
-        </div>
+        />
+
         {/* Middle Name */}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Middle Name</span>
-          </label>
-          <input
-            {...register("middle_name", {
-              required: "Middle Name field cannot be empty",
-            })}
-            type="text"
-            placeholder="Type your Product Name"
-            name="middle_name"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-          {errors.name?.type === "required" && (
-            <p className="text-orange-600" role="alert">
-              {errors.middle_name?.message}
-            </p>
+        <Controller
+          name="middle_name"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="MiddleName"
+              varient="outline"
+              error={!!errors.middle_name}
+              helperText={errors.middle_name ? errors.middle_name.message : ""}
+            />
           )}
-        </div>
+        />
+
         {/* Last Name */}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Last Name</span>
-          </label>
-          <input
-            {...register("last_name", {
-              required: "Last Name field cannot be empty",
-            })}
-            type="text"
-            placeholder="Type your Product Name"
-            name="last_name"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-          {errors.name?.type === "required" && (
-            <p className="text-orange-600" role="alert">
-              {errors.last_name?.message}
-            </p>
+        <Controller
+          name="last_name"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="LastName"
+              varient="outline"
+              error={!!errors.last_name}
+              helperText={errors.last_name ? errors.last_name.message : ""}
+            />
           )}
-        </div>
+        />
 
         {/* Class */}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Select Product Condition?</span>
-          </label>
-          <select
-            {...register("class", {
-              required: "Please Select Class",
-            })}
-            name="class"
-            type="select"
-            className="select select-bordered neutral w-full max-w-xs"
-          >
-            <option selected default>
-              Class
-            </option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
-            <option>11</option>
-            <option>12</option>
-          </select>
-        </div>
-        {/* Division*/}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Division</span>
-          </label>
+        <Controller
+          name="class"
+          control={control}
+          render={({ field }) => (
+            <Select {...field} label="Class" varient="outline" mt-2>
+              <MenuItem selected default>
+                Class
+              </MenuItem>
+              <MenuItem>1</MenuItem>
+              <MenuItem>2</MenuItem>
+              <MenuItem>3</MenuItem>
+              <MenuItem>4</MenuItem>
+              <MenuItem>5</MenuItem>
+              <MenuItem>6</MenuItem>
+              <MenuItem>7</MenuItem>
+              <MenuItem>8</MenuItem>
+              <MenuItem>9</MenuItem>
+              <MenuItem>10</MenuItem>
+              <MenuItem>11</MenuItem>
+              <MenuItem>12</MenuItem>
+            </Select>
+          )}
+        />
 
-          <select
-            {...register("division", {
-              required: "Please select Division",
-            })}
-            name="division"
-            type="select"
-            className="select select-bordered neutral text-slate-700 w-full max-w-xs"
-          >
-            <option disabled selected>
-              Division
-            </option>
-            <option>A</option>
-            <option>B</option>
-            <option>C</option>
-            <option>D</option>
-            <option>E</option>
-          </select>
-        </div>
+        {/* Division*/}
+
+        {/* <Controller
+          as={
+            <Select>
+              <MenuItem disabled selected>
+                Division
+              </MenuItem>
+              <MenuItem>A</MenuItem>
+              <MenuItem>B</MenuItem>
+              <MenuItem>C</MenuItem>
+              <MenuItem>D</MenuItem>
+              <MenuItem>E</MenuItem>
+            </Select>
+          }
+          control={control}
+          name="mySelect"
+        /> */}
+
         {/* Roll Number */}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Roll Number</span>
-          </label>
-          <input
-            {...register("rool_number", {
-              required: "enter short rool number",
-            })}
-            type="text"
-            placeholder="Type here"
-            name="rool_number"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-        </div>
+
         {/* Address Line 1*/}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Address Line 1</span>
-          </label>
-          <textarea
-            {...register("address_one", {
-              required: "enter used Duration",
-            })}
-            row="4"
-            column="32"
-            type="text"
-            placeholder="Type here"
-            name="address_one"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-        </div>
+
         {/* Address Line 2*/}
-        <div className="form-control w-full max-w-xs">
-          <label className="label">
-            <span className="label-text">Address Line 2</span>
-          </label>
-          <textarea
-            {...register("address_two", {
-              required: "enter used Duration",
-            })}
-            row="4"
-            column="32"
-            type="text"
-            placeholder="Type here"
-            name="address_two"
-            className="input input-bordered neutral  w-full max-w-xs"
-          />
-        </div>
 
         <input
           className="btn mt-5 w-full max-w-xs btn-accent"
