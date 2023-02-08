@@ -237,7 +237,7 @@ const AddStudent = ({ name, label, required }) => {
               label="Address One"
               color="success"
               type="text"
-              sx={{ m: 1, width: "25ch" }}
+              sx={{ m: 1, width: "50ch" }}
               error={!!errors.address_one}
               helperText={errors.address_one ? errors.last_name.message : ""}
             />
@@ -255,7 +255,7 @@ const AddStudent = ({ name, label, required }) => {
               label="Address Two"
               color="success"
               type="text"
-              sx={{ m: 1, width: "25ch" }}
+              sx={{ m: 1, width: "50ch" }}
               error={!!errors.address_two}
               helperText={errors.address_two ? errors.last_name.message : ""}
             />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
@@ -13,8 +13,11 @@ import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
+import { AuthContext } from "../../context/AuthProvider";
 
 const SideMenu = () => {
+  const { logOut } = useContext(AuthContext);
+
   return (
     <Paper sx={{ width: 320, maxWidth: "100%" }}>
       <MenuList>
@@ -41,7 +44,9 @@ const SideMenu = () => {
           <ListItemIcon>
             <LogoutIcon fontSize="small" />
           </ListItemIcon>
-          <Button varient="contained">Log Out </Button>
+          <Button varient="contained" onClick={logOut}>
+            Log Out{" "}
+          </Button>
         </MenuItem>
       </MenuList>
     </Paper>

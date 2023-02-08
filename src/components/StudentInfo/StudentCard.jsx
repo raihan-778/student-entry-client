@@ -13,8 +13,11 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { toast } from "react-toastify";
+import StudentEdtiModal from "./StudentEdtiModal";
 
 export default function StudentCard() {
+  // const [open, setOpen] = useState(false);
+  // const handleOpen = () => setOpen(true);
   const [deleteStudent, setDeleteStudent] = useState("");
   const [stdInfo, setStdInfo] = useState("");
   const url = "https://student-entry-server.vercel.app/student-info";
@@ -55,7 +58,7 @@ export default function StudentCard() {
         .then((data) => {
           console.log(data);
           if (data.deletedCount > 0) {
-            toast.success(`buyer ${student.firstName} deleted successfully`);
+            toast.warning(" Student deleted successfully");
           }
         });
     }
@@ -96,9 +99,9 @@ export default function StudentCard() {
                     <Button onClick={() => handleDeleteStudent(student._id)}>
                       <DeleteIcon />
                     </Button>
-                    <Link to="#">
+                    <Button>
                       <EditIcon />
-                    </Link>
+                    </Button>
                   </div>
                 </TableCell>
               </TableRow>

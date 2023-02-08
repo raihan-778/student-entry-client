@@ -1,4 +1,4 @@
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
@@ -8,6 +8,7 @@ import { AuthContext } from "../../context/AuthProvider";
 
 const SignUp = () => {
   const { signUp } = useContext(AuthContext);
+  const [signUpError, setSignUpError] = useState("");
 
   const {
     register,
@@ -18,27 +19,27 @@ const SignUp = () => {
   } = useForm();
   control;
 
-  const handleLogin = (data) => {
+  const handleSignUp = (data) => {
     console.log(data);
     signUp(data.email, data.password)
       .then((result) => {
         const user = result.user;
-        console.log(data.password);
-        setLoginUserpassword(data.password);
-        user.uid && toast.success("User login successfully");
+        console.log(user.email);
 
-        setLoginError("");
+        user.uid && toast.success("User Sign Up successfully");
+
+        setSignUpError("");
       })
       .catch((err) => {
         console.error(err.message);
-        setLoginError(err.message);
+        setSignUpError(err.message);
       });
   };
 
   return (
     <Box fullWidth sx={{ padding: 5, marginX: "auto" }}>
       <h2>Please SignUp</h2>
-      <form onSubmit={handleSubmit(handleLogin)}>
+      <form onSubmit={handleSubmit(handleSignUp)}>
         {/* First Name */}
         <Controller
           name="email"
@@ -72,6 +73,9 @@ const SignUp = () => {
             />
           )}
         />
+        <Button variant="contained" type="submit" color="success">
+          Sign Up
+        </Button>
       </form>
     </Box>
   );

@@ -1,4 +1,4 @@
-import { Box, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import { GoogleAuthProvider } from "firebase/auth";
 import React, { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -72,6 +72,9 @@ const Login = () => {
             />
           )}
         />
+        <Button variant="contained" type="submit" color="success">
+          Login
+        </Button>
       </form>
       <h2>
         Do not have an account! Please <Link to="/signup">singUp</Link>
