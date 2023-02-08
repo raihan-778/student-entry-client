@@ -9,8 +9,8 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 
 import HomeIcon from "@mui/icons-material/Home";
 import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
-import ContentPaste from "@mui/icons-material/ContentPaste";
-import Cloud from "@mui/icons-material/Cloud";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 
@@ -32,14 +32,14 @@ const SideMenu = () => {
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <ContentPaste fontSize="small" />
+            <LoginIcon fontSize="small" />
           </ListItemIcon>
           <Link to="/login">Login</Link>
         </MenuItem>
         <Divider />
         <MenuItem>
           <ListItemIcon>
-            <Cloud fontSize="small" />
+            <LogoutIcon fontSize="small" />
           </ListItemIcon>
           <Button varient="contained">Log Out </Button>
         </MenuItem>

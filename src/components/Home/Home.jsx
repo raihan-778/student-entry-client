@@ -24,9 +24,6 @@ const Home = () => {
           <Grid item lg={2} xs={12}>
             <SideMenu></SideMenu>
           </Grid>
-          <Grid item lg={2} xs={12}>
-            <Navigation></Navigation>
-          </Grid>
           <Grid item lg={10} xs={12}>
             <StudentCard></StudentCard>
           </Grid>

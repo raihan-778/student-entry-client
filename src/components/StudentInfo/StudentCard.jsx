@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 export default function StudentCard() {
   const [deleteStudent, setDeleteStudent] = useState("");
   const [stdInfo, setStdInfo] = useState("");
-  const url = "http://localhost:5000/student-info";
+  const url = "https://student-entry-server.vercel.app/student-info";
   // const {
   //   data: studentDetails,
   //   isLoading,
@@ -48,7 +48,7 @@ export default function StudentCard() {
       "Are you sure you want delete this Student Info?"
     );
     if (proceed) {
-      fetch(`http://localhost:5000/student-info/${id}`, {
+      fetch(`https://student-entry-server.vercel.app/student-info/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

@@ -60,7 +60,7 @@ const AddStudent = ({ name, label, required }) => {
             // addressTwo: data.address_two,
           };
           console.log(studentInfo);
-          fetch("http://localhost:5000/student-info", {
+          fetch("https://student-entry-server.vercel.app/student-info", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -46,7 +46,7 @@ function AppMenu() {
           <Stack direction="row" spacing={2}>
             <Avatar
               alt="Remy Sharp"
-              src="../../../public/logo.png"
+              src="/logo.png"
               sx={{
                 width: 32,
                 height: 32,
