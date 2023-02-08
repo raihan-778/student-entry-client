@@ -30,7 +30,6 @@ const AddStudent = ({ name, label, required }) => {
     watch,
     control,
   } = useForm();
-  control;
 
   const handelAddStudent = (data) => {
     console.log(data);
@@ -52,12 +51,12 @@ const AddStudent = ({ name, label, required }) => {
             firstName: data.first_name,
             middleName: data.middle_name,
             lastName: data.last_name,
-            class: data.class,
+            className: data.class,
             division: data.division,
             image: imgData.data.url,
             rollNumber: data.roll_number,
             addressOne: data.address_one,
-            // addressTwo: data.address_two,
+            addressTwo: data.address_two,
           };
           console.log(studentInfo);
           fetch("https://student-entry-server.vercel.app/student-info", {

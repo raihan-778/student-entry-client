@@ -11,13 +11,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Modal } from "@mui/material";
 import { toast } from "react-toastify";
 import StudentEdtiModal from "./StudentEdtiModal";
 
 export default function StudentCard() {
-  // const [open, setOpen] = useState(false);
-  // const handleOpen = () => setOpen(true);
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [deleteStudent, setDeleteStudent] = useState("");
   const [stdInfo, setStdInfo] = useState("");
   const url = "https://student-entry-server.vercel.app/student-info";
@@ -99,8 +100,16 @@ export default function StudentCard() {
                     <Button onClick={() => handleDeleteStudent(student._id)}>
                       <DeleteIcon />
                     </Button>
-                    <Button>
+                    <Button onClick={handleOpen}>
                       <EditIcon />
+                      <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        <StudentEdtiModal key={student._id} student={student} />
+                      </Modal>
                     </Button>
                   </div>
                 </TableCell>
