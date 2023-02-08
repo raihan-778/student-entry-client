@@ -2,7 +2,15 @@ import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import React, { useState } from "react";
-import { Box, MenuItem, Select, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
+import AppMenu from "../globalComponent/AppMenu";
 
 const AddStudent = ({ name, label, required }) => {
   // const { control, handleSubmit } = useController();
@@ -132,20 +140,24 @@ const AddStudent = ({ name, label, required }) => {
         <br />
         <br />
         {/* Class */}
+        <InputLabel id="student-class">Class</InputLabel>
         <Controller
           name="class"
           control={control}
           margin="normal"
           render={({ field }) => (
             <Select
+              id="student-class"
               {...field}
-              label="Class"
               varient="outline"
+              label="Class"
+              defaultValue="Class"
               sx={{
                 borderColor: "red",
                 borderWidth: 2,
                 borderRadius: 2,
                 paddingX: 5,
+                marginRight: 2,
               }}
             >
               <MenuItem selected default>
@@ -168,12 +180,14 @@ const AddStudent = ({ name, label, required }) => {
         />
 
         {/* Division*/}
+        <InputLabel id="student-division">Division</InputLabel>
         <Controller
           name="division"
           control={control}
           render={({ field }) => (
             <Select
               {...field}
+              id="student-division"
               label="Class"
               varient="outline"
               sx={{
@@ -194,6 +208,7 @@ const AddStudent = ({ name, label, required }) => {
             </Select>
           )}
         />
+        <br />
 
         {/* Roll Number */}
         <Controller
@@ -230,13 +245,31 @@ const AddStudent = ({ name, label, required }) => {
         />
 
         {/* Address Line 2*/}
+        <Controller
+          name="address_two"
+          control={control}
+          margin="normal"
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="Address Two"
+              color="success"
+              type="text"
+              sx={{ m: 1, width: "25ch" }}
+              error={!!errors.address_two}
+              helperText={errors.address_two ? errors.last_name.message : ""}
+            />
+          )}
+        />
         {/* file upload */}
+        <InputLabel id="add-profile-pic">Add Profile Picture</InputLabel>
         <Controller
           name="url"
           control={control}
-          defaultValue=""
           render={({ field }) => (
             <input
+              sx={{ padding: 3 }}
+              id="add-profile-pic"
               type="file"
               onChange={(e) => {
                 field.onChange(e.target.files);
@@ -247,11 +280,9 @@ const AddStudent = ({ name, label, required }) => {
         />
         <br />
         <br />
-        <input
-          className="btn mt-5 w-full max-w-xs btn-accent"
-          value="Submit"
-          type="submit"
-        />
+        <Button variant="contained" type="submit" color="success">
+          Submit
+        </Button>
       </form>
     </Box>
   );

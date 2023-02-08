@@ -10,21 +10,24 @@ import { Link } from "react-router-dom";
 import StudentCard from "../StudentInfo/StudentCard";
 import Navigation from "./Navigation";
 import Grid from "@mui/material/Grid";
+import SideMenu from "./SideMenu";
 
 const Home = () => {
   return (
     <Box
-      fullWidth
       sx={{
         backgroundColor: "#E5FDD1",
       }}
     >
       <>
-        <Grid container spacing={2}>
-          <Grid item xs={2}>
+        <Grid sx={{}} container spacing={2}>
+          <Grid item lg={2} xs={12}>
+            <SideMenu></SideMenu>
+          </Grid>
+          <Grid item lg={2} xs={12}>
             <Navigation></Navigation>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item lg={10} xs={12}>
             <StudentCard></StudentCard>
           </Grid>
         </Grid>
